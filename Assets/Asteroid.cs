@@ -8,6 +8,8 @@ public class Asteroid : MonoBehaviour
 	
 	public int lifePoints;
 	
+	public GameObject asteroid;
+	
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +36,10 @@ public class Asteroid : MonoBehaviour
 			if (lifePoints <= 0)
 			{
 				Destroy(gameObject);
+				
+				GameObject newAsteroid = Instantiate(asteroid);
+				Vector3 v = new Vector3(5.0f, 0, 0);
+				newAsteroid.transform.position += v;
 			}
 		}
 	}
