@@ -230,8 +230,8 @@ GameObject:
   - component: {fileID: 494976}
   - component: {fileID: 5444550}
   - component: {fileID: 11425652}
-  - component: {fileID: 2048819761354209552}
   - component: {fileID: 1264490687439190312}
+  - component: {fileID: -8933022072289960365}
   m_Layer: 0
   m_Name: Asteroid 1
   m_TagString: Enemy
@@ -283,20 +283,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tumble: 0.25
---- !u!114 &2048819761354209552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 151664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad2d2c44f31134d7bba960491f1549ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GM: {fileID: 0}
-  lifePoints: 5
 --- !u!135 &1264490687439190312
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -310,6 +296,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-8933022072289960365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3bc038cae0484cb6b81ca0908f4a30b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &176588
 GameObject:
   m_ObjectHideFlags: 0

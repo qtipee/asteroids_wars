@@ -408,13 +408,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1458841571
+--- !u!1001 &1451858899
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8933022072289960365, guid: fa49e460baf435b4780da7196c2ab473,
+        type: 3}
+      propertyPath: GM
+      value: 
+      objectReference: {fileID: 861627556}
     - target: {fileID: 151664, guid: fa49e460baf435b4780da7196c2ab473, type: 3}
       propertyPath: m_Name
       value: Asteroid 1
@@ -463,11 +468,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2048819761354209552, guid: fa49e460baf435b4780da7196c2ab473,
-        type: 3}
-      propertyPath: GM
-      value: 
-      objectReference: {fileID: 861627556}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fa49e460baf435b4780da7196c2ab473, type: 3}
 --- !u!1 &1567110755

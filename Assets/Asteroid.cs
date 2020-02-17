@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Asteroid1Script : MonoBehaviour
+public class Asteroid : MonoBehaviour
 {
 	public GameManager GM;
 	
-	public int lifePoints = 5;
+	public int lifePoints;
 	
     // Start is called before the first frame update
     void Start()
     {
         GM = GameObject.FindObjectOfType<GameManager>();
+		
+		lifePoints = Random.Range(5, 20);
+		
+		GM.UpdateScore(lifePoints);
     }
 
     // Update is called once per frame
@@ -22,10 +26,10 @@ public class Asteroid1Script : MonoBehaviour
 	
 	private void OnMouseDown()
 	{
-
 		if (GM.gameIsPlaying)
 		{
-			GM.UpdateScore(1);
+			--lifePoints;
+			GM.UpdateScore(-1);
 		}
 	}
 }
