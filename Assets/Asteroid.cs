@@ -15,9 +15,12 @@ public class Asteroid : MonoBehaviour
     {
         GM = GameObject.FindObjectOfType<GameManager>();
 		
-		lifePoints = Random.Range(5, 20);
+		// Maybe associate life points with size
+		lifePoints = (int)gameObject.transform.localScale.x + 5;
 		
-		GM.UpdateScore(lifePoints);
+		
+		// FIXME: TMP
+		GM.UpdateScore(lifePoints);	
     }
 
     // Update is called once per frame
@@ -31,15 +34,40 @@ public class Asteroid : MonoBehaviour
 		if (GM.gameIsPlaying)
 		{
 			--lifePoints;
+			
+			// FIXME: TMP
 			GM.UpdateScore(-1);
 			
+			// Asteroid destroyed
 			if (lifePoints <= 0)
 			{
-				Destroy(gameObject);
+				float scale = gameObject.transform.localScale.x / 2f;
+				Vector3 position = gameObject.transform.position;
 				
-				GameObject newAsteroid = Instantiate(asteroid);
-				Vector3 v = new Vector3(5.0f, 0, 0);
-				newAsteroid.transform.position += v;
+				// Limit scale with fragments after destruction
+				if (scale >= 1)
+				{
+					Vector3 newScale = new Vector3(scale, scale, scale);
+					
+					// Number of fragments depends on destroyed asteroid scale
+					for (int i = 0; i < (int)scale; i++)
+					{
+						GameObject newAsteroid = Instantiate(asteroid);
+					
+						// Scale
+						newAsteroid.transform.localScale = newScale;
+					
+						// Position
+						float rndX = Random.Range(-scale, scale);
+						float rndY = Random.Range(-scale, scale);
+						float rndZ = Random.Range(-scale, scale);
+						
+						Vector3 newPosition = new Vector3(rndX, rndY, rndZ);
+						newAsteroid.transform.position += newPosition;	
+					}
+				}
+				
+				Destroy(gameObject);
 			}
 		}
 	}
