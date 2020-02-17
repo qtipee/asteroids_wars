@@ -1,1 +1,3 @@
-# asteroids_wars
+# Asteroids Wars
+
+Projet d'infographie
