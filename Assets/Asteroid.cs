@@ -30,6 +30,11 @@ public class Asteroid : MonoBehaviour
 		{
 			--lifePoints;
 			GM.UpdateScore(-1);
+			
+			if (lifePoints <= 0)
+			{
+				Destroy(gameObject);
+			}
 		}
 	}
 }
