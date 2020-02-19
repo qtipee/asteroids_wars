@@ -75,13 +75,12 @@ public class Asteroid : MonoBehaviour
 	// Click on an asteroid
 	private void OnMouseDown()
 	{
-		Destroy();
+		StartCoroutine(DestroyCouroutine());
 	}
 
-	private void OnTriggerEnter(Collider other)
+	private IEnumerator DestroyCouroutine()
 	{
+		yield return new WaitForSeconds(0.2f); // for a better rendering
 		Destroy();
 	}
-
-
 }
