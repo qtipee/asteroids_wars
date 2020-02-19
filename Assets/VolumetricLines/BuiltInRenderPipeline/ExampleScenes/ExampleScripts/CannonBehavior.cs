@@ -24,7 +24,7 @@ public class CannonBehavior : MonoBehaviour {
 		{
 			m_cannonRot.transform.Rotate(Vector3.up, Time.deltaTime * 100f);
 		}
-		if (Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetMouseButton(0))
 		{
 			GameObject go = GameObject.Instantiate(m_shotPrefab, m_muzzle.position, m_muzzle.rotation) as GameObject;
 			GameObject.Destroy(go, 3f);
