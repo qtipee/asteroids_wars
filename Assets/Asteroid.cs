@@ -8,7 +8,7 @@ public class Asteroid : MonoBehaviour
 	
 	public static float FRAGMENTS_SCALE_DIVISION = 2f;
 	
-	public GameManager GM;
+	//public GameManager GM;
 	
 	public int lifePoints;
 	
@@ -17,7 +17,7 @@ public class Asteroid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GM = GameObject.FindObjectOfType<GameManager>();
+        //GM = GameObject.FindObjectOfType<GameManager>();
 		
 		// FIXME
 		// Maybe associate life points with size
@@ -75,9 +75,9 @@ public class Asteroid : MonoBehaviour
 	// Click on an asteroid
 	private void OnMouseDown()
 	{
-		if (GM.gameIsPlaying)
-		{
-			Destroy();
-		}
+		//if (GM.gameIsPlaying)
+		//{
+		//	Destroy();
+		//}
 	}
 }
