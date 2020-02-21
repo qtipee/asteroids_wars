@@ -37,14 +37,20 @@ public class GameManager : MonoBehaviour
 	public void IncrementActualScore()
 	{
 		actualScore++;
-		ActualScore.text = actualScore.ToString();
+		UpdateTMP();
 	}
 
 	public void IncrementBaseScore()
 	{
 		baseScore += actualScore;
 		actualScore = 0;
-		BaseScore.text = BaseScore.ToString();
+		UpdateTMP();
+	}
+
+	private void UpdateTMP()
+	{
+		ActualScore.text = actualScore.ToString();
+		BaseScore.text = baseScore.ToString();
 	}
 
 	// Generates asteroids, whose positions are randomly generated in a given area

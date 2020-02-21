@@ -7,10 +7,8 @@ public class BaseController : MonoBehaviour
     public GameManager GM;
 
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Test");
-
         if (other.gameObject == GameObject.FindGameObjectWithTag("Spaceship"))
         {
             GM.IncrementBaseScore();

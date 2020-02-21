@@ -8,8 +8,6 @@ public class Asteroid : MonoBehaviour
 	
 	public static float FRAGMENTS_SCALE_DIVISION = 2f;
 	
-	//public GameManager GM;
-	
 	public int lifePoints;
 	
 	public GameObject asteroid;
@@ -28,12 +26,12 @@ public class Asteroid : MonoBehaviour
 		GM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-	
+	private void OnTriggerEnter(Collider other)
+	{
+		GM.IncrementActualScore();
+		Destroy();
+	}
+
 	// Destroys this asteroid and may create some fragments (based on this asteroid scale)
 	void Destroy()
 	{
@@ -73,21 +71,5 @@ public class Asteroid : MonoBehaviour
 		GameObject newAsteroid2 = Instantiate(asteroid);
 		newAsteroid2.transform.localScale = newScale;
 		newAsteroid2.transform.position = newPos2;
-	}
-	
-	// Click on an asteroid
-	private void OnMouseOver()
-	{
-		if (Input.GetMouseButton(0))
-		{
-			StartCoroutine(DestroyCouroutine());
-		}
-	}
-
-	private IEnumerator DestroyCouroutine()
-	{
-		yield return new WaitForSeconds(0.2f); // for a better rendering
-		GM.IncrementActualScore();
-		Destroy();
 	}
 }
