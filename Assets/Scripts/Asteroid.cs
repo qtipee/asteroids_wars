@@ -13,6 +13,7 @@ public class Asteroid : MonoBehaviour
 	public int lifePoints;
 	
 	public GameObject asteroid;
+	public GameManager GM;
 	
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,8 @@ public class Asteroid : MonoBehaviour
 		// Maybe associate life points with size
 		//lifePoints = (int)gameObject.transform.localScale.x + 5;
 		lifePoints = 1;
+
+		GM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -73,14 +76,18 @@ public class Asteroid : MonoBehaviour
 	}
 	
 	// Click on an asteroid
-	private void OnMouseDown()
+	private void OnMouseOver()
 	{
-		StartCoroutine(DestroyCouroutine());
+		if (Input.GetMouseButton(0))
+		{
+			StartCoroutine(DestroyCouroutine());
+		}
 	}
 
 	private IEnumerator DestroyCouroutine()
 	{
 		yield return new WaitForSeconds(0.2f); // for a better rendering
+		GM.IncrementActualScore();
 		Destroy();
 	}
 }
