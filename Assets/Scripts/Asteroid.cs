@@ -73,9 +73,12 @@ public class Asteroid : MonoBehaviour
 	}
 	
 	// Click on an asteroid
-	private void OnMouseDown()
+	private void OnMouseOver()
 	{
-		StartCoroutine(DestroyCouroutine());
+		if (Input.GetMouseButton(0))
+		{
+			StartCoroutine(DestroyCouroutine());
+		}
 	}
 
 	private IEnumerator DestroyCouroutine()

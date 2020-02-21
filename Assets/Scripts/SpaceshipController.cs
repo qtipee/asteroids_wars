@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpaceshipController : MonoBehaviour
 {
-    private float speed = 10.0f;
+    private float speed = 100.0f;
 
     public float lookSpeed = 10f;
 
