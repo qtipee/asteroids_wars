@@ -8,21 +8,14 @@ public class Asteroid : MonoBehaviour
 	
 	public static float FRAGMENTS_SCALE_DIVISION = 2f;
 	
-	//public GameManager GM;
-	
-	public int lifePoints;
+	public static float EXPULSION_FORCE_INTENSITY = 2f;
 	
 	public GameObject asteroid;
 	
     // Start is called before the first frame update
     void Start()
     {
-        //GM = GameObject.FindObjectOfType<GameManager>();
 		
-		// FIXME
-		// Maybe associate life points with size
-		//lifePoints = (int)gameObject.transform.localScale.x + 5;
-		lifePoints = 1;
     }
 
     // Update is called once per frame
@@ -60,16 +53,24 @@ public class Asteroid : MonoBehaviour
 			zScale / FRAGMENTS_SCALE_DIVISION);
 		
 		// First fragment
-		Vector3 newPos1 = new Vector3(xPos - xScale, yPos, zPos);
+		Vector3 newPos1 = new Vector3(xPos, yPos, zPos);
 		GameObject newAsteroid1 = Instantiate(asteroid);
 		newAsteroid1.transform.localScale = newScale;
 		newAsteroid1.transform.position = newPos1;
 		
+		float forceX = Random.Range(0, 2) == 0 ? -EXPULSION_FORCE_INTENSITY : EXPULSION_FORCE_INTENSITY;
+		float forceY = Random.Range(0, 2) == 0 ? -EXPULSION_FORCE_INTENSITY : EXPULSION_FORCE_INTENSITY;
+		float forceZ = Random.Range(0, 2) == 0 ? -EXPULSION_FORCE_INTENSITY : EXPULSION_FORCE_INTENSITY;
+		
+		newAsteroid1.GetComponent<Rigidbody>().AddForce(new Vector3(forceX, forceY, forceZ), ForceMode.VelocityChange);
+		
 		// Second fragment
-		Vector3 newPos2 = new Vector3(xPos + xScale, yPos, zPos);
+		Vector3 newPos2 = new Vector3(xPos, yPos, zPos);
 		GameObject newAsteroid2 = Instantiate(asteroid);
 		newAsteroid2.transform.localScale = newScale;
 		newAsteroid2.transform.position = newPos2;
+		
+		newAsteroid2.GetComponent<Rigidbody>().AddForce(new Vector3(-forceX, -forceY, -forceZ), ForceMode.VelocityChange);
 	}
 	
 	// Click on an asteroid
