@@ -8,9 +8,11 @@ public class Asteroid : MonoBehaviour
 	
 	public static float FRAGMENTS_SCALE_DIVISION = 2f;
 	
-	public static float EXPULSION_FORCE_INTENSITY = 2f;
+	public static float EXPULSION_FORCE_INTENSITY = 3f;
 	
 	public GameObject asteroid;
+	
+	public GameObject explosion;
 	
     // Start is called before the first frame update
     void Start()
@@ -32,6 +34,8 @@ public class Asteroid : MonoBehaviour
 		{
 			CreateFragments();
 		}
+		
+		GameObject newExplosion = Instantiate(explosion);
 			
 		// Destroys this asteroid
 		Destroy(gameObject);
