@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class BaseController : MonoBehaviour
         if (other.gameObject == GameObject.FindGameObjectWithTag("Spaceship"))
         {
             GM.IncrementBaseScore();
+            GM.OldTime = DateTime.Now;
         }
     }
 }
