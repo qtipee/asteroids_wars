@@ -105,7 +105,7 @@ Rigidbody:
   m_GameObject: {fileID: 130102}
   serializedVersion: 2
   m_Mass: 100
-  m_Drag: 1
+  m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -137,9 +137,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3bc038cae0484cb6b81ca0908f4a30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GM: {fileID: 0}
-  lifePoints: 0
   asteroid: {fileID: 130102}
+  explosion: {fileID: 8957536998376092213, guid: 9640a66c5c2694527a1bcb4fb5830780,
+    type: 3}
 --- !u!135 &2513031428739880109
 SphereCollider:
   m_ObjectHideFlags: 0
