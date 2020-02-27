@@ -36,6 +36,7 @@ public class Asteroid : MonoBehaviour
 		}
 		
 		GameObject newExplosion = Instantiate(explosion);
+		newExplosion.transform.position = gameObject.transform.position;
 			
 		// Destroys this asteroid
 		Destroy(gameObject);
