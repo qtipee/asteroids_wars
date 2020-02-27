@@ -35,6 +35,7 @@ public class Asteroid : MonoBehaviour
 			CreateFragments();
 		}
 		
+		// Creates an explosion at this asteroid position
 		GameObject newExplosion = Instantiate(explosion);
 		newExplosion.transform.position = gameObject.transform.position;
 			
@@ -57,16 +58,16 @@ public class Asteroid : MonoBehaviour
 			yScale / FRAGMENTS_SCALE_DIVISION,
 			zScale / FRAGMENTS_SCALE_DIVISION);
 		
+		// Randomly opposed force vectors for the two asteroid fragments
+		float forceX = Random.Range(0, 2) == 0 ? -EXPULSION_FORCE_INTENSITY : EXPULSION_FORCE_INTENSITY;
+		float forceY = Random.Range(0, 2) == 0 ? -EXPULSION_FORCE_INTENSITY : EXPULSION_FORCE_INTENSITY;
+		float forceZ = Random.Range(0, 2) == 0 ? -EXPULSION_FORCE_INTENSITY : EXPULSION_FORCE_INTENSITY;
+		
 		// First fragment
 		Vector3 newPos1 = new Vector3(xPos, yPos, zPos);
 		GameObject newAsteroid1 = Instantiate(asteroid);
 		newAsteroid1.transform.localScale = newScale;
 		newAsteroid1.transform.position = newPos1;
-		
-		float forceX = Random.Range(0, 2) == 0 ? -EXPULSION_FORCE_INTENSITY : EXPULSION_FORCE_INTENSITY;
-		float forceY = Random.Range(0, 2) == 0 ? -EXPULSION_FORCE_INTENSITY : EXPULSION_FORCE_INTENSITY;
-		float forceZ = Random.Range(0, 2) == 0 ? -EXPULSION_FORCE_INTENSITY : EXPULSION_FORCE_INTENSITY;
-		
 		newAsteroid1.GetComponent<Rigidbody>().AddForce(new Vector3(forceX, forceY, forceZ), ForceMode.VelocityChange);
 		
 		// Second fragment
@@ -74,7 +75,6 @@ public class Asteroid : MonoBehaviour
 		GameObject newAsteroid2 = Instantiate(asteroid);
 		newAsteroid2.transform.localScale = newScale;
 		newAsteroid2.transform.position = newPos2;
-		
 		newAsteroid2.GetComponent<Rigidbody>().AddForce(new Vector3(-forceX, -forceY, -forceZ), ForceMode.VelocityChange);
 	}
 	
