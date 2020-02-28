@@ -448,7 +448,7 @@ PrefabInstance:
     - target: {fileID: 1727521889550438053, guid: 2f2027c38e31349038a03dc1a49b9d53,
         type: 3}
       propertyPath: defaultValue
-      value: 50
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 1840961399429658105, guid: 2f2027c38e31349038a03dc1a49b9d53,
         type: 3}
@@ -776,9 +776,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Number Asteroids
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a13297445d9ce3248a7d028236047b09, type: 2}
-  m_sharedMaterial: {fileID: 2392973819523262090, guid: a13297445d9ce3248a7d028236047b09,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1069,9 +1068,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Scene Size
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a13297445d9ce3248a7d028236047b09, type: 2}
-  m_sharedMaterial: {fileID: 2392973819523262090, guid: a13297445d9ce3248a7d028236047b09,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1245,9 +1243,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: START
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a13297445d9ce3248a7d028236047b09, type: 2}
-  m_sharedMaterial: {fileID: 2392973819523262090, guid: a13297445d9ce3248a7d028236047b09,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1529,7 +1526,7 @@ PrefabInstance:
     - target: {fileID: 1727521889550438053, guid: 2f2027c38e31349038a03dc1a49b9d53,
         type: 3}
       propertyPath: defaultValue
-      value: 50
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 1840961399429658104, guid: 2f2027c38e31349038a03dc1a49b9d53,
         type: 3}

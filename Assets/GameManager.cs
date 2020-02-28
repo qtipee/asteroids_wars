@@ -135,6 +135,9 @@ public class GameManager : MonoBehaviour
 	{
 		// List of occupied positions in the scene
 		List<Vector3> usedSpots = new List<Vector3>();
+
+        // Position (0, 0, 0) must be free, because this is where the spaceship spawns
+		usedSpots.Add(new Vector3(0, 0, 0));
 		
 		for (int i = 0; i < nbAsteroids; i++)
 		{	
