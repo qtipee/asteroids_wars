@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -7,26 +9,53 @@ public class GameManager : MonoBehaviour
 	public const float ASTEROID_MAX_SCALE = 5;
 	
 	public const int MAX_RANDOM_ASTEROID_ITERATIONS = 10;
-	
+	public const int MAX_TIME = 10;
+
 	public GameObject asteroid1;
 	public GameObject asteroid2;
 	public GameObject asteroid3;
-	
-    // Start is called before the first frame update
-    void Start()
+
+	//UI
+	public TextMeshProUGUI Time;
+
+	public TextMeshProUGUI ActualScore;
+	private int actualScore = 0;
+
+	public TextMeshProUGUI BaseScore;
+	private int baseScore = 0;
+
+	private DateTime oldTime;
+
+	public DateTime OldTime { set => oldTime = value; }
+
+	// Start is called before the first frame update
+	void Start()
     {
 		int nbAsteroids = 50;
 		float minPos = -100;
 		float maxPos = 100;
-		
+
+		oldTime = DateTime.Now;
+
 		CreateRandomAsteroids(nbAsteroids, minPos, maxPos);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
+		int difference = (int)(DateTime.Now - oldTime).TotalSeconds;
+
+		if (difference > MAX_TIME)
+		{
+			actualScore = 0;
+			oldTime = DateTime.Now;
+			UpdateTMP();
+		}
+		else
+		{
+			Time.text = "Temps restant : " + (MAX_TIME - difference).ToString();
+		}
+	}
 	
 	// Generates asteroids, whose positions are randomly generated in a given area
 	private void CreateRandomAsteroids(int nbAsteroids, float minPos, float maxPos)
@@ -42,9 +71,9 @@ public class GameManager : MonoBehaviour
 			while (true)
 			{
 				// Generates random coordinates
-				float x = Random.Range(minPos, maxPos);
-				float y = Random.Range(minPos, maxPos);
-				float z = Random.Range(minPos, maxPos);
+				float x = UnityEngine.Random.Range(minPos, maxPos);
+				float y = UnityEngine.Random.Range(minPos, maxPos);
+				float z = UnityEngine.Random.Range(minPos, maxPos);
 				
 				bool isSpotFree = true;
 			
@@ -68,7 +97,7 @@ public class GameManager : MonoBehaviour
 					usedSpots.Add(pos);
 					
 					GameObject asteroid;
-					int asteroidType = Random.Range(0, 3);
+					int asteroidType = UnityEngine.Random.Range(0, 3);
 					
 					// Asteroid Prefab #1
 					if (asteroidType == 0)
@@ -89,7 +118,7 @@ public class GameManager : MonoBehaviour
 					asteroid.transform.position = new Vector3(x, y, z);
 					
 					// Random scale
-					float randomScale = Random.Range(1f, ASTEROID_MAX_SCALE + 1);
+					float randomScale = UnityEngine.Random.Range(1f, ASTEROID_MAX_SCALE + 1);
 					asteroid.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
 					
 					break;
@@ -104,5 +133,23 @@ public class GameManager : MonoBehaviour
 				}
 			}
 		}
+	}
+	public void IncrementActualScore()
+	{
+		actualScore++;
+		UpdateTMP();
+	}
+
+	public void IncrementBaseScore()
+	{
+		baseScore += actualScore;
+		actualScore = 0;
+		UpdateTMP();
+	}
+
+	private void UpdateTMP()
+	{
+		ActualScore.text = "Score actuel : " + actualScore.ToString();
+		BaseScore.text = "Score à la base : " + baseScore.ToString();
 	}
 }
