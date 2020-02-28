@@ -140,6 +140,7 @@ MonoBehaviour:
   asteroid: {fileID: 130102}
   explosion: {fileID: 8957536998376092213, guid: 9640a66c5c2694527a1bcb4fb5830780,
     type: 3}
+  GM: {fileID: 0}
 --- !u!135 &2513031428739880109
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -151,8 +152,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 1.6
+  m_Center: {x: 0, y: 0.2, z: 0.3}
 --- !u!1 &153142
 GameObject:
   m_ObjectHideFlags: 0
