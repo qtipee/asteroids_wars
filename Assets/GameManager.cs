@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
 	public const float ASTEROID_MAX_SCALE = 5;
 	
 	public const int MAX_RANDOM_ASTEROID_ITERATIONS = 10;
+
 	public const int MAX_TIME = 10;
 
 	public GameObject asteroid1;
@@ -16,7 +18,7 @@ public class GameManager : MonoBehaviour
 	public GameObject asteroid3;
 
 	//UI
-	public TextMeshProUGUI Time;
+	public TextMeshProUGUI GameTime;
 
 	public TextMeshProUGUI ActualScore;
 	private int actualScore = 0;
@@ -28,35 +30,83 @@ public class GameManager : MonoBehaviour
 
 	public DateTime OldTime { set => oldTime = value; }
 
+	private bool isPlaying;
+
 	// Start is called before the first frame update
 	void Start()
     {
-		int nbAsteroids = 50;
-		float minPos = -100;
-		float maxPos = 100;
 
 		oldTime = DateTime.Now;
 
-		CreateRandomAsteroids(nbAsteroids, minPos, maxPos);
-    }
+		int nbAsteroids = CrossSceneInformation.nbAsteroids;
+		float sceneSize = CrossSceneInformation.sceneSize;
+
+		// Generates a random game scene
+		CreateRandomAsteroids(nbAsteroids, sceneSize, -sceneSize);
+
+		isPlaying = true;
+	}
 
     // Update is called once per frame
     void Update()
     {
-		int difference = (int)(DateTime.Now - oldTime).TotalSeconds;
+		if (isPlaying)
+		{
+			int difference = (int)(DateTime.Now - oldTime).TotalSeconds;
 
-		if (difference > MAX_TIME)
-		{
-			actualScore = 0;
-			oldTime = DateTime.Now;
-			UpdateTMP();
+			if (difference > MAX_TIME)
+			{
+				actualScore = 0;
+				oldTime = DateTime.Now;
+				UpdateTMP();
+			}
+			else
+			{
+				GameTime.text = "Temps restant : " + (MAX_TIME - difference).ToString();
+			}
 		}
-		else
+
+        // Pause/Resume key pressed
+        if (Input.GetKeyDown("p"))
 		{
-			Time.text = "Temps restant : " + (MAX_TIME - difference).ToString();
+			if (isPlaying)
+			{
+				PauseGame();
+			}
+            else
+			{
+				ResumeGame();
+			}
 		}
 	}
-	
+
+	public void IncrementActualScore()
+	{
+		actualScore++;
+		UpdateTMP();
+	}
+
+	public void IncrementBaseScore()
+	{
+		baseScore += actualScore;
+		actualScore = 0;
+		UpdateTMP();
+	}
+
+    // Pauses the game
+    private void PauseGame()
+	{
+		Time.timeScale = 0;
+		isPlaying = false;
+	}
+
+    // Resumes the game
+    private void ResumeGame()
+	{
+		Time.timeScale = 1;
+		isPlaying = true;
+	}
+
 	// Generates asteroids, whose positions are randomly generated in a given area
 	private void CreateRandomAsteroids(int nbAsteroids, float minPos, float maxPos)
 	{
@@ -133,18 +183,6 @@ public class GameManager : MonoBehaviour
 				}
 			}
 		}
-	}
-	public void IncrementActualScore()
-	{
-		actualScore++;
-		UpdateTMP();
-	}
-
-	public void IncrementBaseScore()
-	{
-		baseScore += actualScore;
-		actualScore = 0;
-		UpdateTMP();
 	}
 
 	private void UpdateTMP()
