@@ -1,6 +1,4 @@
 ﻿using System;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -52,6 +50,7 @@ public class GameManager : MonoBehaviour
 		CrossSceneInformation.isPlaying = true;
 
 		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
 	}
 
     // Update is called once per frame
@@ -110,6 +109,7 @@ public class GameManager : MonoBehaviour
 		buttonRestart.SetActive(true);
 
 		Cursor.lockState = CursorLockMode.Confined;
+		Cursor.visible = true;
 	}
 
     // Resumes the game
@@ -122,6 +122,7 @@ public class GameManager : MonoBehaviour
 		buttonRestart.SetActive(false);
 
 		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
 	}
 
     // Restarts the game -> show game menu

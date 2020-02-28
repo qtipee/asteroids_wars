@@ -546,7 +546,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 7.44e-43, y: 4.343746, z: 7.44e-43, w: -3780424}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1295,7 +1295,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 2.7105054e-20, z: 2.3509887e-38, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 8.1875}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -2233,6 +2233,7 @@ GameObject:
   - component: {fileID: 2024954169}
   - component: {fileID: 2024954168}
   - component: {fileID: 2024954172}
+  - component: {fileID: 2024954173}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -2328,3 +2329,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GM: {fileID: 1635522012}
+--- !u!122 &2024954173
+Halo:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024954167}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294904064
+  m_Size: 20
