@@ -14,7 +14,14 @@ public class Asteroid : MonoBehaviour
 	public GameObject asteroid;
 	
 	public GameObject explosion;
-	
+
+	public GameManager GM;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+		GM = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+	}
 	// Destroys this asteroid and may create some fragments (based on this asteroid scale)
 	void Destroy()
 	{
@@ -66,7 +73,7 @@ public class Asteroid : MonoBehaviour
 		newAsteroid2.transform.position = newPos2;
 		newAsteroid2.GetComponent<Rigidbody>().AddForce(new Vector3(-forceX, -forceY, -forceZ), ForceMode.VelocityChange);
 	}
-	
+
 	// Click on an asteroid
 	private void OnMouseOver()
 	{
@@ -79,6 +86,7 @@ public class Asteroid : MonoBehaviour
 	private IEnumerator DestroyCouroutine()
 	{
 		yield return new WaitForSeconds(0.2f); // for a better rendering
+		GM.IncrementActualScore();
 		Destroy();
 	}
 }
