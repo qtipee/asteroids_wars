@@ -216,6 +216,7 @@ GameObject:
   - component: {fileID: 439990257}
   - component: {fileID: 439990256}
   - component: {fileID: 439990255}
+  - component: {fileID: 439990259}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -307,6 +308,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &439990259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439990254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6391ccec0bdd45e08d65d8cdcc8b80d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputNbAsteroids: {fileID: 880124819}
+  inputSceneSize: {fileID: 1604221667}
 --- !u!1 &880124817 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1840961400308578297, guid: 2f2027c38e31349038a03dc1a49b9d53,
@@ -371,12 +386,12 @@ PrefabInstance:
     - target: {fileID: 1727521889550438053, guid: 2f2027c38e31349038a03dc1a49b9d53,
         type: 3}
       propertyPath: minValue
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1727521889550438053, guid: 2f2027c38e31349038a03dc1a49b9d53,
         type: 3}
       propertyPath: maxValue
-      value: 100
+      value: 999
       objectReference: {fileID: 0}
     - target: {fileID: 1727521889550438053, guid: 2f2027c38e31349038a03dc1a49b9d53,
         type: 3}
@@ -1285,7 +1300,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1915488972}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 439990259}
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1915488972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1352,7 +1378,7 @@ PrefabInstance:
     - target: {fileID: 1727521889550438053, guid: 2f2027c38e31349038a03dc1a49b9d53,
         type: 3}
       propertyPath: maxValue
-      value: 100
+      value: 999
       objectReference: {fileID: 0}
     - target: {fileID: 1727521889550438053, guid: 2f2027c38e31349038a03dc1a49b9d53,
         type: 3}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Asteroid behaviour
 public class Asteroid : MonoBehaviour
 {
 	public static float MINIMUM_SCALE_FRAGMENTS = 2f;
@@ -13,18 +14,6 @@ public class Asteroid : MonoBehaviour
 	public GameObject asteroid;
 	
 	public GameObject explosion;
-	
-    // Start is called before the first frame update
-    void Start()
-    {
-		
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 	
 	// Destroys this asteroid and may create some fragments (based on this asteroid scale)
 	void Destroy()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+// Menu number type inputs
 public class NumberInputField : MonoBehaviour
 {
     public TMP_InputField inputField;
@@ -14,6 +15,7 @@ public class NumberInputField : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Input on value changed event
         inputField.onValueChanged.AddListener(delegate { ValueChanged(); });
 
         // Default value at start
@@ -25,7 +27,7 @@ public class NumberInputField : MonoBehaviour
 	{
         int intValue;
 
-        // Tries to parse the string to an integer
+        // Tries to parse the input string value to an integer
         if (int.TryParse(inputField.text, out intValue))
 		{
             // Min limit

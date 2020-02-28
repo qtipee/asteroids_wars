@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
 	public const float ASTEROID_MAX_SCALE = 5;
 	
 	public const int MAX_RANDOM_ASTEROID_ITERATIONS = 10;
-	
+
 	public GameObject asteroid1;
 	public GameObject asteroid2;
 	public GameObject asteroid3;
@@ -15,12 +16,12 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		int nbAsteroids = 50;
-		float minPos = -100;
-		float maxPos = 100;
-		
-		CreateRandomAsteroids(nbAsteroids, minPos, maxPos);
-    }
+		int nbAsteroids = CrossSceneInformation.nbAsteroids;
+		float sceneSize = CrossSceneInformation.sceneSize;
+
+        // Generates a random game scene
+		CreateRandomAsteroids(nbAsteroids, sceneSize, -sceneSize);
+	}
 
     // Update is called once per frame
     void Update()
