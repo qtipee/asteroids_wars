@@ -43,4 +43,17 @@ public class SpaceshipController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
             Cursor.lockState = CursorLockMode.Confined;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Die");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Enemy")
+        {
+            Debug.Log("die");
+        }
+    }
 }
