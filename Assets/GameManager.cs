@@ -28,14 +28,18 @@ public class GameManager : MonoBehaviour
 	private int baseScore = 0;
 
 	private DateTime oldTime;
-
 	public DateTime OldTime { set => oldTime = value; }
+
+	public GameObject buttonResume;
+	public GameObject buttonRestart;
 
 	private bool isPlaying;
 
 	// Start is called before the first frame update
 	void Start()
     {
+		buttonResume.SetActive(false);
+		buttonRestart.SetActive(false);
 
 		oldTime = DateTime.Now;
 
@@ -45,13 +49,15 @@ public class GameManager : MonoBehaviour
 		// Generates a random game scene
 		CreateRandomAsteroids(nbAsteroids, sceneSize, -sceneSize);
 
-		isPlaying = true;
+		CrossSceneInformation.isPlaying = true;
+
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 
     // Update is called once per frame
     void Update()
     {
-		if (isPlaying)
+		if (CrossSceneInformation.isPlaying)
 		{
 			int difference = (int)(DateTime.Now - oldTime).TotalSeconds;
 
@@ -70,7 +76,7 @@ public class GameManager : MonoBehaviour
         // Pause/Resume key pressed
         if (Input.GetKeyDown("p"))
 		{
-			if (isPlaying)
+			if (CrossSceneInformation.isPlaying)
 			{
 				PauseGame();
 			}
@@ -95,17 +101,33 @@ public class GameManager : MonoBehaviour
 	}
 
     // Pauses the game
-    private void PauseGame()
+    public void PauseGame()
 	{
-		Time.timeScale = 0;
-		isPlaying = false;
+		//Time.timeScale = 0.1f;
+		CrossSceneInformation.isPlaying = false;
+
+		buttonResume.SetActive(true);
+		buttonRestart.SetActive(true);
+
+		Cursor.lockState = CursorLockMode.Confined;
 	}
 
     // Resumes the game
-    private void ResumeGame()
+    public void ResumeGame()
 	{
-		Time.timeScale = 1;
-		isPlaying = true;
+		//Time.timeScale = 1;
+		CrossSceneInformation.isPlaying = true;
+
+		buttonResume.SetActive(false);
+		buttonRestart.SetActive(false);
+
+		Cursor.lockState = CursorLockMode.Locked;
+	}
+
+    // Restarts the game -> show game menu
+    public void RestartGame()
+	{
+		SceneManager.LoadScene("MenuScene");
 	}
 
 	// Generates asteroids, whose positions are randomly generated in a given area
@@ -194,6 +216,7 @@ public class GameManager : MonoBehaviour
 
 	public void LoadEndScene()
 	{
+		Cursor.lockState = CursorLockMode.Confined;
 		CrossSceneInformation.score = baseScore;
 		SceneManager.LoadScene("EndScene");
 	}
