@@ -8,4 +8,6 @@ public static class CrossSceneInformation
     public static int nbAsteroids { get; set; }
 
     public static float sceneSize { get; set; }
+
+    public static int score { get; set; }
 }

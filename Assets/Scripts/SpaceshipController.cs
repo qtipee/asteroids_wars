@@ -15,6 +15,8 @@ public class SpaceshipController : MonoBehaviour
     public Vector2 smoothing = new Vector2(3f, 3f);
     public Vector2 clampInDegrees = new Vector2(360, 180);
 
+    public GameManager GM;
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -44,16 +46,12 @@ public class SpaceshipController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Confined;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Die");
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Enemy")
         {
-            Debug.Log("die");
+            Cursor.lockState = CursorLockMode.Confined;
+            GM.LoadEndScene();
         }
     }
 }

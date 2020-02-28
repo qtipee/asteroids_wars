@@ -1,4 +1,5 @@
 ﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -189,5 +190,11 @@ public class GameManager : MonoBehaviour
 	{
 		ActualScore.text = "Score actuel : " + actualScore.ToString();
 		BaseScore.text = "Score à la base : " + baseScore.ToString();
+	}
+
+	public void LoadEndScene()
+	{
+		CrossSceneInformation.score = baseScore;
+		SceneManager.LoadScene("EndScene");
 	}
 }
