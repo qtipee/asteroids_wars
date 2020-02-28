@@ -18,21 +18,24 @@ public class CannonBehavior : MonoBehaviour {
 
 	private void FixedUpdate()
 	{
-		targetTime -= Time.deltaTime;
+        if (CrossSceneInformation.isPlaying)
+		{
+			targetTime -= Time.deltaTime;
 
-		if (Input.GetKey(KeyCode.LeftArrow))
-		{
-			m_cannonRot.transform.Rotate(Vector3.up, -Time.deltaTime * 100f);
-		}
-		if (Input.GetKey(KeyCode.RightArrow))
-		{
-			m_cannonRot.transform.Rotate(Vector3.up, Time.deltaTime * 100f);
-		}
-		if (Input.GetMouseButton(0) && targetTime <= 0.0f)
-		{
-			GameObject go = GameObject.Instantiate(m_shotPrefab, m_muzzle.position, m_muzzle.rotation) as GameObject;
-			GameObject.Destroy(go, 3f);
-			targetTime = IntervalTime;
+			if (Input.GetKey(KeyCode.LeftArrow))
+			{
+				m_cannonRot.transform.Rotate(Vector3.up, -Time.deltaTime * 100f);
+			}
+			if (Input.GetKey(KeyCode.RightArrow))
+			{
+				m_cannonRot.transform.Rotate(Vector3.up, Time.deltaTime * 100f);
+			}
+			if (Input.GetMouseButton(0) && targetTime <= 0.0f)
+			{
+				GameObject go = GameObject.Instantiate(m_shotPrefab, m_muzzle.position, m_muzzle.rotation) as GameObject;
+				GameObject.Destroy(go, 3f);
+				targetTime = IntervalTime;
+			}
 		}
 	}
 }
