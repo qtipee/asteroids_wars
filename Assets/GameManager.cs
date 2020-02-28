@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-	public const float ASTEROID_MAX_SCALE = 5;
+	public const float ASTEROID_MAX_SCALE = 6;
 	
 	public const int MAX_RANDOM_ASTEROID_ITERATIONS = 10;
 
@@ -103,24 +103,30 @@ public class GameManager : MonoBehaviour
     // Pauses the game
     public void PauseGame()
 	{
-		//Time.timeScale = 0.1f;
+        // Freezes the game
+		Time.timeScale = 0.001f;
 		CrossSceneInformation.isPlaying = false;
 
+        // Enables the pause buttons
 		buttonResume.SetActive(true);
 		buttonRestart.SetActive(true);
 
+        // Unlocks the cursor
 		Cursor.lockState = CursorLockMode.Confined;
 	}
 
     // Resumes the game
     public void ResumeGame()
 	{
-		//Time.timeScale = 1;
+        // Unfreezes the game
+		Time.timeScale = 1;
 		CrossSceneInformation.isPlaying = true;
 
+        // Disables the pause buttons
 		buttonResume.SetActive(false);
 		buttonRestart.SetActive(false);
 
+        // Locks the cursor
 		Cursor.lockState = CursorLockMode.Locked;
 	}
 
