@@ -1,5 +1,4 @@
 ﻿using System;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -11,8 +10,6 @@ public class GameManager : MonoBehaviour
 	public const float ASTEROID_MAX_SCALE = 6;
 	
 	public const int MAX_RANDOM_ASTEROID_ITERATIONS = 10;
-
-	public const int MAX_TIME = 10;
 
 	public GameObject asteroid1;
 	public GameObject asteroid2;
@@ -27,8 +24,7 @@ public class GameManager : MonoBehaviour
 	public TextMeshProUGUI BaseScore;
 	private int baseScore = 0;
 
-	private DateTime oldTime;
-	public DateTime OldTime { set => oldTime = value; }
+	public int remainingSeconds = CrossSceneInformation.MAX_TIME_HARVEST;
 
 	public GameObject buttonResume;
 	public GameObject buttonRestart;
@@ -38,11 +34,11 @@ public class GameManager : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
+        // Disables the pause buttons
 		buttonResume.SetActive(false);
 		buttonRestart.SetActive(false);
 
-		oldTime = DateTime.Now;
-
+        // Gets the game menu values
 		int nbAsteroids = CrossSceneInformation.nbAsteroids;
 		float sceneSize = CrossSceneInformation.sceneSize;
 
@@ -51,30 +47,21 @@ public class GameManager : MonoBehaviour
 
 		CrossSceneInformation.isPlaying = true;
 
+        // Locks the cursor
 		Cursor.lockState = CursorLockMode.Locked;
+
+        // Starts the remaining time coroutine
+		StartCoroutine(SecondTimer());
 	}
 
     // Update is called once per frame
     void Update()
     {
-		if (CrossSceneInformation.isPlaying)
-		{
-			int difference = (int)(DateTime.Now - oldTime).TotalSeconds;
+        // Updates the remaining time label
+		GameTime.text = "Temps restant : " + remainingSeconds.ToString();
 
-			if (difference > MAX_TIME)
-			{
-				actualScore = 0;
-				oldTime = DateTime.Now;
-				UpdateTMP();
-			}
-			else
-			{
-				GameTime.text = "Temps restant : " + (MAX_TIME - difference).ToString();
-			}
-		}
-
-        // Pause/Resume key pressed
-        if (Input.GetKeyDown("p"))
+		// Pause/Resume key pressed
+		if (Input.GetKeyDown("p"))
 		{
 			if (CrossSceneInformation.isPlaying)
 			{
@@ -83,6 +70,29 @@ public class GameManager : MonoBehaviour
             else
 			{
 				ResumeGame();
+			}
+		}
+	}
+
+    // Coroutine to decrement the remaining time every second
+    IEnumerator SecondTimer()
+	{
+        while (true)
+		{
+            if (CrossSceneInformation.isPlaying)
+			{
+				yield return new WaitForSeconds(1f);
+
+                --remainingSeconds;
+
+                // Resets the remaining time and the actual score
+                if (remainingSeconds == 0)
+				{
+					remainingSeconds = CrossSceneInformation.MAX_TIME_HARVEST;
+
+					actualScore = 0;
+					UpdateTMP();
+				}
 			}
 		}
 	}
