@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,11 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-	public const float ASTEROID_MAX_SCALE = 5;
+	public const float ASTEROID_MAX_SCALE = 6;
 	
 	public const int MAX_RANDOM_ASTEROID_ITERATIONS = 10;
-
-	public const int MAX_TIME = 10;
 
 	public GameObject asteroid1;
 	public GameObject asteroid2;
@@ -25,22 +24,23 @@ public class GameManager : MonoBehaviour
 	public TextMeshProUGUI BaseScore;
 	private int baseScore = 0;
 
-	private DateTime oldTime;
-	public DateTime OldTime { set => oldTime = value; }
+	public int remainingSeconds = CrossSceneInformation.MAX_TIME_HARVEST;
 
 	public GameObject buttonResume;
 	public GameObject buttonRestart;
+	public GameObject buttonExit;
 
 	private bool isPlaying;
 
 	// Start is called before the first frame update
 	void Start()
     {
+        // Disables the pause buttons
 		buttonResume.SetActive(false);
 		buttonRestart.SetActive(false);
+		buttonExit.SetActive(false);
 
-		oldTime = DateTime.Now;
-
+        // Gets the game menu values
 		int nbAsteroids = CrossSceneInformation.nbAsteroids;
 		float sceneSize = CrossSceneInformation.sceneSize;
 
@@ -49,31 +49,24 @@ public class GameManager : MonoBehaviour
 
 		CrossSceneInformation.isPlaying = true;
 
+        // Locks the cursor
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
+
+		Time.timeScale = 1;
+
+		// Starts the remaining time coroutine
+		StartCoroutine(SecondTimer());
 	}
 
     // Update is called once per frame
     void Update()
     {
-		if (CrossSceneInformation.isPlaying)
-		{
-			int difference = (int)(DateTime.Now - oldTime).TotalSeconds;
+        // Updates the remaining time label
+		GameTime.text = "HARVEST TIME : " + remainingSeconds.ToString();
 
-			if (difference > MAX_TIME)
-			{
-				actualScore = 0;
-				oldTime = DateTime.Now;
-				UpdateTMP();
-			}
-			else
-			{
-				GameTime.text = "Temps restant : " + (MAX_TIME - difference).ToString();
-			}
-		}
-
-        // Pause/Resume key pressed
-        if (Input.GetKeyDown("p"))
+		// Pause/Resume key pressed
+		if (Input.GetKeyDown("p"))
 		{
 			if (CrossSceneInformation.isPlaying)
 			{
@@ -82,6 +75,29 @@ public class GameManager : MonoBehaviour
             else
 			{
 				ResumeGame();
+			}
+		}
+	}
+
+    // Coroutine to decrement the remaining time every second
+    IEnumerator SecondTimer()
+	{
+        while (true)
+		{
+            if (CrossSceneInformation.isPlaying)
+			{
+				yield return new WaitForSeconds(1f);
+
+                --remainingSeconds;
+
+                // Resets the remaining time and the actual score
+                if (remainingSeconds == 0)
+				{
+					remainingSeconds = CrossSceneInformation.MAX_TIME_HARVEST;
+
+					actualScore = 0;
+					UpdateTMP();
+				}
 			}
 		}
 	}
@@ -102,12 +118,16 @@ public class GameManager : MonoBehaviour
     // Pauses the game
     public void PauseGame()
 	{
-		//Time.timeScale = 0.1f;
+        // Freezes the game
+		Time.timeScale = 0.001f;
 		CrossSceneInformation.isPlaying = false;
 
+        // Enables the pause buttons
 		buttonResume.SetActive(true);
 		buttonRestart.SetActive(true);
+		buttonExit.SetActive(true);
 
+		// Unlocks the cursor
 		Cursor.lockState = CursorLockMode.Confined;
 		Cursor.visible = true;
 	}
@@ -115,12 +135,16 @@ public class GameManager : MonoBehaviour
     // Resumes the game
     public void ResumeGame()
 	{
-		//Time.timeScale = 1;
+		// Unfreezes the game
+		Time.timeScale = 1;
 		CrossSceneInformation.isPlaying = true;
 
+        // Disables the pause buttons
 		buttonResume.SetActive(false);
 		buttonRestart.SetActive(false);
+		buttonExit.SetActive(false);
 
+		// Locks the cursor
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
 	}
@@ -136,6 +160,9 @@ public class GameManager : MonoBehaviour
 	{
 		// List of occupied positions in the scene
 		List<Vector3> usedSpots = new List<Vector3>();
+
+        // Position (0, 0, 0) must be free, because this is where the spaceship spawns
+		usedSpots.Add(new Vector3(0, 0, 0));
 		
 		for (int i = 0; i < nbAsteroids; i++)
 		{	
@@ -211,14 +238,20 @@ public class GameManager : MonoBehaviour
 
 	private void UpdateTMP()
 	{
-		ActualScore.text = "Score actuel : " + actualScore.ToString();
-		BaseScore.text = "Score à la base : " + baseScore.ToString();
+		ActualScore.text = "ACTUAL SCORE : " + actualScore.ToString();
+		BaseScore.text = "BASE SCORE : " + baseScore.ToString();
 	}
 
 	public void LoadEndScene()
 	{
 		Cursor.lockState = CursorLockMode.Confined;
+		Cursor.visible = true;
 		CrossSceneInformation.score = baseScore;
 		SceneManager.LoadScene("EndScene");
+	}
+
+	public void Quit()
+	{
+		Application.Quit();
 	}
 }

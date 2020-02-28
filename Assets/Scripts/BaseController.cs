@@ -13,7 +13,7 @@ public class BaseController : MonoBehaviour
         if (other.gameObject == GameObject.FindGameObjectWithTag("Spaceship"))
         {
             GM.IncrementBaseScore();
-            GM.OldTime = DateTime.Now;
+            GM.remainingSeconds = CrossSceneInformation.MAX_TIME_HARVEST;
         }
     }
 }
