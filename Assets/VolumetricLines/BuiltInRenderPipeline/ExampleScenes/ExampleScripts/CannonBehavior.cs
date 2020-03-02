@@ -10,10 +10,17 @@ public class CannonBehavior : MonoBehaviour {
 	public float IntervalTime;
 	private float targetTime;
 
+	private AudioSource audioSourceShoot;
+	public AudioClip shootSound;
+
 	// Use this for initialization
 	void Start()
 	{
 		targetTime = IntervalTime;
+		audioSourceShoot = gameObject.AddComponent<AudioSource>();
+		audioSourceShoot.clip = shootSound;
+		audioSourceShoot.playOnAwake = false;
+		audioSourceShoot.loop = false;
 	}
 
 	private void FixedUpdate()
@@ -32,6 +39,7 @@ public class CannonBehavior : MonoBehaviour {
 			}
 			if (Input.GetMouseButton(0) && targetTime <= 0.0f)
 			{
+				audioSourceShoot.Play();
 				GameObject go = GameObject.Instantiate(m_shotPrefab, m_muzzle.position, m_muzzle.rotation) as GameObject;
 				GameObject.Destroy(go, 3f);
 				targetTime = IntervalTime;

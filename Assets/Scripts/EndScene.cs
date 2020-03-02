@@ -10,7 +10,7 @@ public class EndScene : MonoBehaviour
 
     private void Start()
     {
-        score.text = "Vous avez un score de : " + CrossSceneInformation.score.ToString();
+        score.text = "YOUR SCORE IS : " + CrossSceneInformation.score.ToString();
     }
 
     public void TryAgain()

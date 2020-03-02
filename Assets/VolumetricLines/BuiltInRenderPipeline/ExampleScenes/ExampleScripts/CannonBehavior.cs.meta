@@ -1,8 +1,15 @@
 fileFormatVersion: 2
 guid: 6ea36ef7a00788340aa4961f12313cec
 MonoImporter:
+  externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_cannonRot: {instanceID: 0}
+  - m_muzzle: {instanceID: 0}
+  - m_shotPrefab: {instanceID: 0}
+  - shootSound: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
+  assetBundleName: 
+  assetBundleVariant: 
